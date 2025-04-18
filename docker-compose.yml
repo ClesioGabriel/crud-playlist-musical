@@ -1,54 +1,69 @@
 version: "3.7"
 
 services:
-    # image project
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        restart: unless-stopped
-        working_dir: /var/www/
-        volumes:
-            - ./:/var/www
-        depends_on:
-            - redis
-        networks:
-            - laravel
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - redis
+    networks:
+      - laravel
 
-    # nginx
-    nginx:
-        image: nginx:alpine
-        restart: unless-stopped
-        ports:
-            - "8989:80"
-        volumes:
-            - ./:/var/www
-            - ./docker/nginx/:/etc/nginx/conf.d/
-        networks:
-            - laravel
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "8989:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - laravel
 
-    # db mysql
-    db:
-        image: mysql:5.7.22
-        restart: unless-stopped
-        environment:
-            MYSQL_DATABASE: ${DB_DATABASE:-laravel}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-            MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-            MYSQL_USER: ${DB_USERNAME:-username}
-        volumes:
-            - ./.docker/mysql/dbdata:/var/lib/mysql
-        ports:
-            - "3388:3306"
-        networks:
-            - laravel
+  db:
+    image: mysql:5.7.22
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
+      MYSQL_USER: ${DB_USERNAME:-username}
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3388:3306"
+    networks:
+      - laravel
 
-    # redis
-    redis:
-        image: redis:latest
-        networks:
-            - laravel
+  redis:
+    image: redis:latest
+    networks:
+      - laravel
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: ${DB_USERNAME:-root}
+      PMA_PASSWORD: ${DB_PASSWORD:-root}
+    depends_on:
+      - db
+    networks:
+      - laravel
 
 networks:
-    laravel:
-        driver: bridge
+  laravel:
+    driver: bridge
+
+volumes:
+  dbdata:
