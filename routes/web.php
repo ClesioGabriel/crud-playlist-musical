@@ -4,6 +4,27 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckIfIsAdmin;
+use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\AlbumController;
+
+
+Route::delete('/albums/{id}', [AlbumController::class, 'destroy'])->name('albums.destroy');
+Route::get('/albums/create', [AlbumController::class, 'create'])->name('albums.create');
+Route::get('/albums/{id}', [AlbumController::class, 'show'])->name('albums.show');
+Route::put('/albums/{id}', [AlbumController::class, 'update'])->name('albums.update');
+Route::get('/albums/{id}/edit', [AlbumController::class, 'edit'])->name('albums.edit');
+Route::post('/albums/store', [AlbumController::class, 'store'])->name('albums.store');
+Route::get('/albums', [AlbumController::class, 'index'])->name('albums.index');
+
+
+Route::delete('/artists/{id}', [ArtistController::class, 'destroy'])->name('artists.destroy');
+Route::get('/artists/create', [ArtistController::class, 'create'])->name('artists.create');
+Route::get('/artists/{id}', [ArtistController::class, 'show'])->name('artists.show');
+Route::put('/artists/{id}', [ArtistController::class, 'update'])->name('artists.update');
+Route::get('/artists/{id}/edit', [ArtistController::class, 'edit'])->name('artists.edit');
+Route::post('/artists/store', [ArtistController::class, 'store'])->name('artists.store');
+Route::get('/artists', [ArtistController::class, 'index'])->name('artists.index');
+
 
 Route::middleware('auth')
     ->prefix('admin')
@@ -16,7 +37,6 @@ Route::middleware('auth')
         Route::post('/admin/users/store', [UserController::class, 'store'])->name('users.store');
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
-
 
 Route::get('/', function () {
     return view('welcome');
