@@ -6,6 +6,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckIfIsAdmin;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\MusicController;
+
+
+Route::delete('/musics/{id}', [MusicController::class, 'destroy'])->name('musics.destroy');
+Route::get('/musics/create', [MusicController::class, 'create'])->name('musics.create');
+Route::get('/musics/{id}', [MusicController::class, 'show'])->name('musics.show');
+Route::put('/musics/{id}', [MusicController::class, 'update'])->name('musics.update');
+Route::get('/musics/{id}/edit', [MusicController::class, 'edit'])->name('musics.edit');
+Route::post('/musics/store', [MusicController::class, 'store'])->name('musics.store');
+Route::get('/musics', [MusicController::class, 'index'])->name('musics.index');
 
 
 Route::delete('/albums/{id}', [AlbumController::class, 'destroy'])->name('albums.destroy');
