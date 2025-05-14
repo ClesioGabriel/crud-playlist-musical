@@ -15,18 +15,31 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Início') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                        {{ __('Usuários') }}
+                    
+                    @php
+                        $adminEmails = config('custom.admins');
+                    @endphp
+
+                    @if(Auth::check() && in_array(Auth::user()->email, $adminEmails))
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                            {{ __('Usuários') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('artists.index')" :active="request()->routeIs('artists.*')">
+                            {{ __('Artistas') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('albums.index')" :active="request()->routeIs('albums.*')">
+                            {{ __('Álbuns') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('musics.index')" :active="request()->routeIs('musics.*')">
+                            {{ __('Músicas') }}
+                        </x-nav-link>
+                    @endif
+
+
+                    <x-nav-link :href="route('playlists.index')" :active="request()->routeIs('playlists.*')">
+                        {{ __('Playlists') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('artists.index')" :active="request()->routeIs('artists.*')">
-                        {{ __('Artistas') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('albums.index')" :active="request()->routeIs('albums.*')">
-                        {{ __('Álbuns') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('musics.index')" :active="request()->routeIs('musics.*')">
-                        {{ __('Músicas') }}
-                    </x-nav-link>
+
                 </div>
             </div>
 

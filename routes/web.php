@@ -7,6 +7,15 @@ use App\Http\Middleware\CheckIfIsAdmin;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\MusicController;
+use App\Http\Controllers\PlaylistController;
+
+Route::delete('/playlists/{id}', [PlaylistController::class, 'destroy'])->name('playlists.destroy');
+Route::get('/playlists/create', [PlaylistController::class, 'create'])->name('playlists.create');
+Route::get('/playlists/{id}', [PlaylistController::class, 'show'])->name('playlists.show');
+Route::put('/playlists/{id}', [PlaylistController::class, 'update'])->name('playlists.update');
+Route::get('/playlists/{id}/edit', [PlaylistController::class, 'edit'])->name('playlists.edit');
+Route::post('/playlists/store', [PlaylistController::class, 'store'])->name('playlists.store');
+Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
 
 
 Route::delete('/musics/{id}', [MusicController::class, 'destroy'])->name('musics.destroy');
