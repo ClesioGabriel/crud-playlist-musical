@@ -62,8 +62,7 @@
                             >
                                 <div id="screenshot-container" class="relative flex w-full flex-1 items-stretch">
                                     <img
-                                        src="https://raw.githubusercontent.com/ClesioGabriel/crud-playlist-musical/refs/heads/main/HitWave%20Logo.png"
-                                        alt="Laravel documentation screenshot"
+                                        src="https://raw.githubusercontent.com/ClesioGabriel/crud-playlist-musical/5fd65a64be537af5398a8511482e6d65ca654f00/HitWave%20Logo.png"
                                         class="aspect-video h-full w-full flex-1 rounded-[10px] object-top object-cover drop-shadow-[0px_4px_34px_rgba(0,0,0,0.06)] dark:hidden"
                                         onerror="
                                             document.getElementById('screenshot-container').classList.add('!hidden');

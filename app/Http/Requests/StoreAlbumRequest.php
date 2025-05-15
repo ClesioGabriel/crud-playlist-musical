@@ -24,7 +24,7 @@ class StoreAlbumRequest extends FormRequest
     {
         return [
             'name' => 'string|max:255',
-            'artist' => 'nullable|string|max:255',
+            'artist_id' => 'required|exists:artists,id',
             'genre' => 'nullable|string|max:1000',
         ];
     }

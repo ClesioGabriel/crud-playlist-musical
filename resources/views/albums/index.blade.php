@@ -6,7 +6,7 @@
     <div class="py-6 mb-2">
         <a href="{{ route('albums.create') }}">
             <x-primary-button>
-                <i class="fa-solid fa-plus m-1"></i> Criar Novo Álbum
+                <i class="fa-solid fa-plus m-1"></i> Cadastrar Novo Álbum
             </x-primary-button>
         </a>
     </div>
@@ -27,7 +27,7 @@
                 @forelse ($albums as $album)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4">{{ $album->name }}</td>
-                        <td class="px-6 py-4">{{ $album->artist }}</td>
+                        <td>{{ $album->artist->name ?? 'Artista não encontrado' }}</td>
                         <td class="px-6 py-4">{{ $album->genre }}</td>
                         <td class="px-6 py-4 flex gap-2">
                             <a href="{{ route('albums.edit', $album->id) }}" class="text-blue-600 hover:underline">Editar</a>

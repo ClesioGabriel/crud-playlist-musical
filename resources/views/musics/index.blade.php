@@ -40,7 +40,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="100">Nenhuma música no banco</td>
+                        <td colspan="4" class="text-center py-4" >Nenhuma música no banco</td>
                     </tr>
                 @endforelse
             </tbody>

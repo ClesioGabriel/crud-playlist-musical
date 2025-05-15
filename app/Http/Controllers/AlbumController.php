@@ -8,17 +8,21 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreAlbumRequest;
 use App\Http\Requests\UpdateAlbumRequest;
 
+use App\Models\Artist;
+
 class AlbumController extends Controller
 {
     public function index()
     {
-        $albums = Album::paginate(15);
-        return view('albums.index', compact('albums'));
+    $albums = Album::with('artist')->paginate(15);
+    return view('albums.index', compact('albums'));
     }
+
 
     public function create()
     {
-        return view('albums.create');
+    $artists = Artist::all(); // ou ->orderBy('name')->get();
+    return view('albums.create', compact('artists'));
     }
 
     public function store(StoreAlbumRequest $request)

@@ -11,7 +11,13 @@ class Album extends Model
 
     protected $fillable = [
         'name',
-        'artist',
+        'artist_id',
         'genre',
     ];
+
+    public function artist(){   
+        return $this->belongsTo(Artist::class);
+    }
+
+
 }

@@ -38,7 +38,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="100">Nenhuma playlist no banco</td>
+                        <td colspan="4" class="text-center py-4">Nenhuma playlist no banco</td>
                     </tr>
                 @endforelse
             </tbody>

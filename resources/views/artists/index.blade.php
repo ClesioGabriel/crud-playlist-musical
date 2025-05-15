@@ -38,7 +38,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="100">Nenhum artista no banco</td>
+                        <td colspan="4" class="text-center py-4">Nenhum artista no banco</td>
                     </tr>
                 @endforelse
             </tbody>
