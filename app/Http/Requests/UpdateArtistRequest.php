@@ -24,6 +24,7 @@ class UpdateArtistRequest extends FormRequest
         
         return [
             'name' => 'required|string|max:255',
+            'album_id' => 'nullable|exists:albums,id',
             'genre' => 'nullable|string|max:255',
             'birth_date' => 'nullable|date',
         ];

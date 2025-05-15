@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreArtistRequest;
 use App\Http\Requests\UpdateArtistRequest;
 
+use App\Models\Album;
+
 class ArtistController extends Controller
 {
     public function index()
@@ -18,7 +20,8 @@ class ArtistController extends Controller
 
     public function create()
     {
-        return view('artists.create');
+        $albums = Album::all(); // ou ->orderBy('name')->get()
+        return view('artists.create', compact('albums'));
     }
 
     public function store(StoreArtistRequest $request)
@@ -32,14 +35,12 @@ class ArtistController extends Controller
 
     public function edit(string $id)
     {
-        if (!$artist = Artist::find($id)) {
-            return redirect()
-                ->route('artists.index')
-                ->with('warning', 'Artista não encontrado.');
-        }
+        $artist = Artist::findOrFail($id);
+        $albums = Album::all();
 
-        return view('artists.edit', compact('artist'));
+        return view('artists.edit', compact('artist', 'albums'));
     }
+
 
     public function update(UpdateArtistRequest $request, string $id)
     {

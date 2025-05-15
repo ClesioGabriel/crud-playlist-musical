@@ -8,9 +8,18 @@
     </div>
 
     <div class="mb-4">
-        <input type="text" name="album" placeholder="Álbum" value="{{ $artist->album ?? old('album') }}"
+        <select name="album_id"
             class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">Selecione um álbum</option>
+            @foreach($albums as $album)
+                <option value="{{ $album->id }}"
+                    {{ old('album_id') == $album->id || (isset($artist) && $artist->album_id == $album->id) ? 'selected' : '' }}>
+                    {{ $album->name }}
+                </option>
+            @endforeach
+        </select>
     </div>
+
 
 
     <div class="mb-4">

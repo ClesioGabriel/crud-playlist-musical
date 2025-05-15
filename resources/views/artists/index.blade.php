@@ -22,6 +22,7 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-4">Nome</th>
+                    <th scope="col" class="px-6 py-4">Álbum</th>
                     <th scope="col" class="px-6 py-4">Gênero</th>
                     <th scope="col" class="px-6 py-4">Ações</th>
                 </tr>
@@ -30,6 +31,9 @@
                 @forelse ($artists as $artist)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4">{{ $artist->name }}</td>
+                        <td class="px-6 py-4">
+                            {{ $artist->album->name ?? 'Nenhum álbum associado' }}
+                        </td>
                         <td class="px-6 py-4">{{ $artist->genre }}</td>
                         <td class="px-6 py-4">
                             <a href="{{ route('artists.edit', $artist->id) }}">Editar</a>

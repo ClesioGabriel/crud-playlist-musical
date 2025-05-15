@@ -10,6 +10,7 @@
     </div>
     <ul class="max-w-md space-y-2 text-gray-500 list-disc list-inside dark:text-gray-400 mb-6">
         <li>Nome: {{ $artist->name }}</li>
+        <li>Álbum: {{ $artist->album->name ?? 'Nenhum álbum associado' }}</li>
         <li>Gênero Musical: {{ $artist->genre }}</li>
         <li>Data de Nascimento: {{ $artist->birth_date }}</li>
     </ul>

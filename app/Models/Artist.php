@@ -11,10 +11,17 @@ class Artist extends Model
 
     protected $fillable = [
         'name',
+        'album_id',
         'genre',
         'birth_date',
     ]; 
     protected $casts = [
         'birth_date' => 'date',
     ];
+
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
+
 }
