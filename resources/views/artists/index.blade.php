@@ -29,10 +29,16 @@
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
                 @forelse ($artists as $artist)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <td class="px-6 py-4">{{ $artist->name }}</td>
                         <td class="px-6 py-4">
-                            {{ $artist->album->name ?? 'Nenhum álbum associado' }}
+                            @if ($artist->albums->isNotEmpty())
+                                @foreach ($artist->albums as $album)
+                                    <span class="block">{{ $album->name }}</span>
+                                @endforeach
+                            @else
+                                Nenhum álbum associado
+                            @endif
                         </td>
                         <td class="px-6 py-4">{{ $artist->genre }}</td>
                         <td class="px-6 py-4">

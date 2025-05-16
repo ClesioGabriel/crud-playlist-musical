@@ -12,22 +12,45 @@
     </div>
 
     <div class="mb-4">
-        <input type="text" name="artist" placeholder="Artista" value="{{ $music->artist ?? old('artist') }}"
+        <select name="artist_id" 
             class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">Selecione um artista</option>
+            @foreach($artists as $artist)
+                <option value="{{ $artist->id }}" 
+                    {{ (isset($album) && $album->artist_id == $artist->id) || old('artist_id') == $artist->id ? 'selected' : '' }}>
+                    {{ $artist->name }}
+                </option>
+            @endforeach
+        </select>
     </div>
 
     <div class="mb-4">
-        <input type="text" name="album" placeholder="Álbum" value="{{ $music->album ?? old('album') }}"
+        <select name="album_id"
             class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">Selecione um álbum</option>
+            @foreach($albums as $album)
+                <option value="{{ $album->id }}"
+                    {{ old('album_id') == $album->id || (isset($artist) && $artist->album_id == $album->id) ? 'selected' : '' }}>
+                    {{ $album->name }}
+                </option>
+            @endforeach
+        </select>
     </div>
 
     <div class="mb-4">
         <select name="genre"
             class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="" disabled {{ old('genre', $music->genre ?? '') == '' ? 'selected' : '' }}>Selecione o Gênero Musical</option>
-            @foreach(['rock' => 'Rock', 'pop' => 'Pop', 'hiphop' => 'Hip-Hop', 'classical' => 'Classical', 'electronic' => 'Electronic', 'reggae' => 'Reggae', 'other' => 'Other'] as $value => $label)
-                <option value="{{ $value }}" {{ old('genre', $music->genre ?? '') == $value ? 'selected' : '' }}>{{ $label }}</option>
-            @endforeach
+            <option value="" disabled selected>Selecione o Gênero Musical</option>
+            <option value="rock" {{ (old('genre') == 'rock' || ($artist->genre ?? '') == 'rock') ? 'selected' : '' }}>Rock</option>
+            <option value="pop" {{ (old('genre') == 'pop' || ($artist->genre ?? '') == 'pop') ? 'selected' : '' }}>Pop</option>
+            <option value="hiphop" {{ (old('genre') == 'hiphop' || ($artist->genre ?? '') == 'hiphop') ? 'selected' : '' }}>Hip-Hop</option>
+            <option value="classical" {{ (old('genre') == 'classical' || ($artist->genre ?? '') == 'classical') ? 'selected' : '' }}>Classical</option>
+            <option value="electronic" {{ (old('genre') == 'electronic' || ($artist->genre ?? '') == 'electronic') ? 'selected' : '' }}>Electronic</option>
+            <option value="reggae" {{ (old('genre') == 'reggae' || ($artist->genre ?? '') == 'reggae') ? 'selected' : '' }}>Reggae</option>
+            <option value="sertanejo" {{ (old('genre') == 'sertanejo' || ($artist->genre ?? '') == 'sertanejo') ? 'selected' : '' }}>Sertanejo</option>
+            <option value="funk" {{ (old('genre') == 'funk' || ($artist->genre ?? '') == 'funk') ? 'selected' : '' }}>Funk</option>
+            <option value="trap" {{ (old('genre') == 'trap' || ($artist->genre ?? '') == 'trap') ? 'selected' : '' }}>Trap</option>
+            <option value="other" {{ (old('genre') == 'other' || ($artist->genre ?? '') == 'other') ? 'selected' : '' }}>Other</option>
         </select>
     </div>
 

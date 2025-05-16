@@ -28,7 +28,7 @@
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
                 @forelse ($playlists as $playlist)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <td class="px-6 py-4">{{ $playlist->name }}</td>
                         <td class="px-6 py-4">{{ $playlist->description }}</td>
                         <td class="px-6 py-4">

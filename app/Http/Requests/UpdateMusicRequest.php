@@ -23,8 +23,8 @@ class UpdateMusicRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'artist' => 'required|string|max:255',
-            'album' => 'required|string|max:255',
+            'artist_id' => 'required|exists:artists,id',
+            'album_id' => 'nullable|exists:albums,id',
             'genre' => 'required|string|max:255',
             'file_path' => 'nullable|file|mimes:mp3,wav,ogg|max:10240', // 10MB max
             'release_date' => 'required|date',

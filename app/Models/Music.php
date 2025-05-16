@@ -13,8 +13,8 @@ class Music extends Model
 
     protected $fillable = [
         'title',
-        'artist',
-        'album',
+        'artist_id',
+        'album_id',
         'genre',
         'file_path',
         'release_date',
@@ -23,5 +23,15 @@ class Music extends Model
     protected $casts = [
         'release_date' => 'date',
     ];
+
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
+    }
+    
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
 
 }

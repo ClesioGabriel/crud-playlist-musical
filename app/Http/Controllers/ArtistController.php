@@ -14,9 +14,10 @@ class ArtistController extends Controller
 {
     public function index()
     {
-        $artists = Artist::paginate(15);
+        $artists = Artist::with('albums')->paginate(15);
         return view('artists.index', compact('artists'));
     }
+
 
     public function create()
     {
@@ -34,12 +35,12 @@ class ArtistController extends Controller
     }
 
     public function edit(string $id)
-    {
-        $artist = Artist::findOrFail($id);
-        $albums = Album::all();
+{
+    $artist = Artist::findOrFail($id);
+    $albums = Album::all();
 
-        return view('artists.edit', compact('artist', 'albums'));
-    }
+    return view('artists.edit', compact('artist', 'albums'));
+}
 
 
     public function update(UpdateArtistRequest $request, string $id)
@@ -78,10 +79,18 @@ class ArtistController extends Controller
                 ->with('warning', 'Artista não encontrado.');
         }
 
+        // Verifica se o artista está vinculado a algum álbum
+        if ($artist->albums()->exists()) {
+            return redirect()
+                ->route('artists.index')
+                ->with('error', 'Não é possível deletar o artista pois ele está vinculado a um ou mais álbuns.');
+        }
+
         $artist->delete();
 
         return redirect()
             ->route('artists.index')
             ->with('success', 'Artista deletado com sucesso.');
     }
+
 }

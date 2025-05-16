@@ -9,10 +9,15 @@
         </h2>
     </div>
     <ul class="max-w-md space-y-2 text-gray-500 list-disc list-inside dark:text-gray-400 mb-6">
-        <li>Nome: {{ $album->name }}</li>
-        <li>Artista: {{ $album->artist }}</li>
+        <li>Título: {{ $album->name }}</li>
+        <li>Artista: {{ $album->artist->name ?? 'Artista não encontrado' }}</li>
         <li>Gênero Musical: {{ $album->genre }}</li>
     </ul>
+
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-2">
+        Músicas do Álbum:
+    </h2>
+
     <x-alert />
 
     <div class="flex items-center gap-4 mt-6">

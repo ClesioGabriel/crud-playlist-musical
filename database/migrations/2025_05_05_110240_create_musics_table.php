@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('musics', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('artist');
-            $table->string('album');
+
+            $table->unsignedBigInteger('artist_id');
+            $table->foreign('artist_id')->references('id')->on('artists')->onDelete('cascade');
+
+            $table->unsignedBigInteger('album_id')->nullable();
+            $table->foreign('album_id')->references('id')->on('albums')->onDelete('set null');
+
             $table->string('genre');
             $table->binary('file_path'); // Campo para armazenar diretamente o arquivo de áudio em formato binário
             $table->date('release_date');            // Correção de tipo: deve ser data

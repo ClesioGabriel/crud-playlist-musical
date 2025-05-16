@@ -23,15 +23,17 @@
                 <tr>
                     <th scope="col" class="px-6 py-4">Título</th>
                     <th scope="col" class="px-6 py-4">Artista</th>
+                    <th scope="col" class="px-6 py-4">Álbum</th>
                     <th scope="col" class="px-6 py-4">Gênero</th>
                     <th scope="col" class="px-6 py-4">Ações</th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
                 @forelse ($musics as $music)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <td class="px-6 py-4">{{ $music->title }}</td>
-                        <td class="px-6 py-4">{{ $music->artist }}</td>
+                        <td>{{ $music->artist->name ?? 'Artista não encontrado' }}</td>
+                        <td class="px-6 py-4">{{ $music->album->name ?? 'Álbum não encontrado' }}</td>
                         <td class="px-6 py-4">{{ $music->genre }}</td>
                         <td class="px-6 py-4">
                             <a href="{{ route('musics.edit', $music->id) }}">Editar</a>

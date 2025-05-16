@@ -10,8 +10,8 @@
     </div>
     <ul class="max-w-md space-y-2 text-gray-500 list-disc list-inside dark:text-gray-400 mb-6">
         <li>Título: {{ $music->title }}</li>
-        <li>Artista: {{ $music->artist }}</li>
-        <li>Álbum: {{ $music->album }}</li>
+        <td>Artista: {{ $music->artist->name ?? 'Artista não encontrado' }}</td>
+        <li>Álbum: <td>{{ $music->album->name ?? 'Álbum não encontrado' }}</td></li>
         <li>Gênero: {{ $music->genre }}</li>
         <li>
             <audio controls>

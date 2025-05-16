@@ -28,7 +28,7 @@
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
                 @forelse ($users as $user)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <td class="px-6 py-4">{{ $user->name }}</td>
                         <td class="px-6 py-4">{{ $user->email }}</td>
                         <td class="px-6 py-4">

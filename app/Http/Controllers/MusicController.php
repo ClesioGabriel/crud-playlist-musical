@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreMusicRequest;
 use App\Http\Requests\UpdateMusicRequest;
 
+use App\Models\Artist;
+use App\Models\Album;
+
 class MusicController extends Controller
 {
     public function index()
@@ -18,7 +21,9 @@ class MusicController extends Controller
 
     public function create()
     {
-        return view('musics.create');
+        $artists = Artist::all();
+        $albums = Album::all();
+        return view('musics.create', compact('artists', 'albums'));
     }
 
     public function store(StoreMusicRequest $request)
@@ -47,7 +52,10 @@ class MusicController extends Controller
                 ->with('warning', 'Música não encontrada.');
         }
 
-        return view('musics.edit', compact('music'));
+        $artists = Artist::all();
+        $albums = Album::all();
+
+        return view('musics.edit', compact('music', 'artists', 'albums')); 
     }
 
     public function update(UpdateMusicRequest $request, string $id)

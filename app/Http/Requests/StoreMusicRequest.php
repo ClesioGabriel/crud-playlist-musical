@@ -23,10 +23,10 @@ class StoreMusicRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'artist' => 'required|string|max:255',
-            'album' => 'required|string|max:255',
+            'artist_id' => 'required|exists:artists,id',
+            'album_id' => 'nullable|exists:albums,id',
             'genre' => 'required|string|max:255',
-            'file_path' => '', // 10MB
+            'file_path' => 'required', // 10MB
             'release_date' => 'required|date',
         ];
     }

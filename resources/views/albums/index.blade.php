@@ -17,7 +17,7 @@
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-4">Nome</th>
+                    <th scope="col" class="px-6 py-4">Título</th>
                     <th scope="col" class="px-6 py-4">Artista</th>
                     <th scope="col" class="px-6 py-4">Gênero</th>
                     <th scope="col" class="px-6 py-4">Ações</th>
@@ -25,11 +25,11 @@
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
                 @forelse ($albums as $album)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <td class="px-6 py-4">{{ $album->name }}</td>
                         <td>{{ $album->artist->name ?? 'Artista não encontrado' }}</td>
                         <td class="px-6 py-4">{{ $album->genre }}</td>
-                        <td class="px-6 py-4 flex gap-2">
+                        <td class="px-6 py-4">
                             <a href="{{ route('albums.edit', $album->id) }}" class="text-blue-600 hover:underline">Editar</a>
                             <a href="{{ route('albums.show', $album->id) }}" class="text-blue-600 hover:underline">Detalhes</a>
                         </td>
