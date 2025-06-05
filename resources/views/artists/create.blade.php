@@ -9,7 +9,7 @@
     </h2>
 </div>
 
-    <form action="{{ route('artists.store') }}" method="POST" class="space-y-4">
+    <form action="{{ route('artists.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
         @include('artists.partials.form')
     </form>

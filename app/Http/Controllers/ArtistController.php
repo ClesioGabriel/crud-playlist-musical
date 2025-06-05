@@ -27,12 +27,20 @@ class ArtistController extends Controller
 
     public function store(StoreArtistRequest $request)
     {
-        Artist::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $image = $request->file('image')->store('artists', 'public');
+            $data['image'] = $image;
+        }
+
+        Artist::create($data);
 
         return redirect()
             ->route('artists.index')
             ->with('success', 'Artista criado com sucesso.');
     }
+
 
     public function edit(string $id)
 {

@@ -23,6 +23,7 @@ class UpdateArtistRequest extends FormRequest
     {
         
         return [
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required|string|max:255',
             'album_id' => 'nullable|exists:albums,id',
             'genre' => 'nullable|string|max:255',

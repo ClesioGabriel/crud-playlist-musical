@@ -6,19 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMusicRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -26,7 +18,7 @@ class UpdateMusicRequest extends FormRequest
             'artist_id' => 'required|exists:artists,id',
             'album_id' => 'nullable|exists:albums,id',
             'genre' => 'required|string|max:255',
-            'file_path' => 'nullable|file|mimes:mp3,wav,ogg|max:10240', // 10MB max
+            'file_path' => 'required',
             'release_date' => 'required|date',
         ];
     }

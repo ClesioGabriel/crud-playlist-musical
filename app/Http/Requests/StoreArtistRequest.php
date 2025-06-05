@@ -23,6 +23,7 @@ class StoreArtistRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'string|max:255',
             'album_id' => 'nullable|exists:albums,id',
             'genre' => 'nullable|string|max:255',

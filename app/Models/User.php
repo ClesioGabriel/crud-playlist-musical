@@ -48,4 +48,9 @@ class User extends Authenticatable
         return in_array($this->email, config('custom.admins'));
     } 
 
+    public function likedMusics()
+    {
+        return $this->belongsToMany(Music::class, 'likes')->withTimestamps();
+    }
+
 }

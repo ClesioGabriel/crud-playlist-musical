@@ -13,12 +13,6 @@
         <td>Artista: {{ $music->artist->name ?? 'Artista não encontrado' }}</td>
         <li>Álbum: <td>{{ $music->album->name ?? 'Álbum não encontrado' }}</td></li>
         <li>Gênero: {{ $music->genre }}</li>
-        <li>
-            <audio controls>
-            <source src="{{ Storage::url($music->file_path) }}" type="audio/mp3">
-            Seu navegador não suporta o elemento de áudio.
-            </audio>
-        </li>
         <li>Data de Lançamento: {{ $music->release_date }}</li>
     </ul>
     <x-alert />

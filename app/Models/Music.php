@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Like;
+use App\Models\Artist;
+use App\Models\Album;
 
 class Music extends Model
 {
@@ -32,6 +35,11 @@ class Music extends Model
     public function album()
     {
         return $this->belongsTo(Album::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 
 }

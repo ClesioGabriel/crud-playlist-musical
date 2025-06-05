@@ -9,10 +9,9 @@
     </h2>
 </div>
 
-    <form action="{{ route('musics.store') }}" method="POST" class="space-y-4">
-        @csrf
-        @include('musics.partials.form')
-    </form>
+{{-- FORM CORRETO (único form, com enctype para upload de arquivo) --}}
+<form method="POST" action="{{ route('musics.store') }}" enctype="multipart/form-data" class="space-y-4">
+    @csrf
+    @include('musics.partials.form')
+</form>
 @endsection
-
-

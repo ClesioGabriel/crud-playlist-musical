@@ -38,6 +38,7 @@
                         <td class="px-6 py-4">
                             <a href="{{ route('musics.edit', $music->id) }}">Editar</a>
                             <a href="{{ route('musics.show', $music->id) }}">Detalhes</a>
+                            <a href="{{ route('musics.play', $music->id) }}">Tocar</a>
                         </td>
                     </tr>
                 @empty

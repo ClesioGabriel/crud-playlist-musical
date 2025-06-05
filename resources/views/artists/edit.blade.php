@@ -8,7 +8,7 @@
             Editar o Artista {{ $artist->name }}
         </h2>
     </div>
-    <form action="{{ route('artists.update', $artist->id) }}" method="POST">
+    <form action="{{ route('artists.update', $artist->id) }}" method="POST" enctype="multipart/form-data">
         @method('put')
         @include('artists.partials.form')
     </form>

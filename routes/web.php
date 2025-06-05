@@ -9,6 +9,11 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PlaylistController;
 
+
+
+Route::post('/musics/{music}/toggle-like', [MusicController::class, 'toggleLike'])->name('musics.toggle-like');
+
+
 Route::delete('/playlists/{id}', [PlaylistController::class, 'destroy'])->name('playlists.destroy');
 Route::get('/playlists/create', [PlaylistController::class, 'create'])->name('playlists.create');
 Route::get('/playlists/{id}', [PlaylistController::class, 'show'])->name('playlists.show');
@@ -18,6 +23,7 @@ Route::post('/playlists/store', [PlaylistController::class, 'store'])->name('pla
 Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
 
 
+Route::get('/musics/{id}/play', [MusicController::class, 'play'])->name('musics.play');
 Route::delete('/musics/{id}', [MusicController::class, 'destroy'])->name('musics.destroy');
 Route::get('/musics/create', [MusicController::class, 'create'])->name('musics.create');
 Route::get('/musics/{id}', [MusicController::class, 'show'])->name('musics.show');

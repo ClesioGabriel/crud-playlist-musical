@@ -42,7 +42,9 @@ class AlbumController extends Controller
                 ->with('warning', 'Álbum não encontrado.');
         }
 
-        return view('albums.edit', compact('album'));
+        $artists = Artist::all();
+
+        return view('albums.edit', compact('album', 'artists'));
     }
 
     public function update(UpdateAlbumRequest $request, string $id)
@@ -61,13 +63,17 @@ class AlbumController extends Controller
 
     public function show(string $id)
     {
-        if (!$album = Album::find($id)) {
+        $album = Album::with('musics')->find($id);
+
+        if (!$album) {
             return redirect()
                 ->route('albums.index')
                 ->with('warning', 'Álbum não encontrado.');
         }
+
         return view('albums.show', compact('album'));
-    }
+}
+
 
     public function destroy(string $id)
     {

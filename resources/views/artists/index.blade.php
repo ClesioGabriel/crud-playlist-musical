@@ -21,6 +21,7 @@
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
+                    <th scope="col" class="px-6 py-4">Imagem</th>
                     <th scope="col" class="px-6 py-4">Nome</th>
                     <th scope="col" class="px-6 py-4">Álbum</th>
                     <th scope="col" class="px-6 py-4">Gênero</th>
@@ -30,6 +31,15 @@
             <tbody class="text-gray-600 text-sm font-light">
                 @forelse ($artists as $artist)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+
+                        <td class="px-6 py-4 text-center">
+                            @if($artist->image)
+                                <img src="{{ asset('storage/' . $artist->image) }}"  class="w-16 h-16 rounded-full object-cover" style="max-width: 100px; max-height: 100px;">
+                            @else
+                                <span>Sem imagem</span>
+                            @endif
+                        </td>
+
                         <td class="px-6 py-4">{{ $artist->name }}</td>
                         <td class="px-6 py-4">
                             @if ($artist->albums->isNotEmpty())
