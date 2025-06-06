@@ -54,9 +54,6 @@ class MusicController extends Controller
     }
 }
 
-
-
-
     public function edit(string $id)
     {
         if (!$music = Music::find($id)) {
@@ -132,7 +129,7 @@ class MusicController extends Controller
 
         $musics = Music::paginate(10);
 
-        return view('musics.play', compact('music', 'musics'));
+        return view('musics.play', compact('music'));
     }
 
     public function toggleLike($musicId)
