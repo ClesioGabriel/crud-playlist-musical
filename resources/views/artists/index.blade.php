@@ -2,18 +2,21 @@
 
 @section('title', 'Listagem dos Artistas')
 
-
 @section('content')
+
     <div class="py-6 mb-2">
 
-        <a href="{{ route('artists.create') }}">
-        <x-primary-button>
-        <i class="fa-solid fa-plus m-1"></i>Cadastrar Novo Artista
-        </x-primary-button>
-        </a>
+    <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Artistas</h1>
 
-
-    </div>
+    @can('is-admin')
+        <div class="py-6 mb-2">
+            <a href="{{ route('artists.create') }}">
+                <x-primary-button>
+                    <i class="fa-solid fa-plus m-1"></i>Cadastrar Novo Artista
+                </x-primary-button>
+            </a>
+        </div>
+    @endcan
 
     <x-alert />
 
@@ -32,7 +35,7 @@
                 @forelse ($artists as $artist)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
 
-                        <td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4 flex justify-center items-center">
                             @if($artist->image)
                                 <img src="{{ asset('storage/' . $artist->image) }}"  class="w-16 h-16 rounded-full object-cover" style="max-width: 100px; max-height: 100px;">
                             @else

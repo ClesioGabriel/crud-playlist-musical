@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-            Schema::create('likes', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->foreignId('music_id')->constrained('musics')->onDelete('cascade');
-        $table->timestamps();
-    });
-
+        Schema::table('musics', function (Blueprint $table) {
+            $table->foreignId('playlist_id')->nullable()->constrained('playlists')->onDelete('set null');
+        });
     }
 
     /**
@@ -25,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('likes');
+        Schema::table('musics', function (Blueprint $table) {
+            $table->dropForeign(['playlist_id']);
+            $table->dropColumn('playlist_id');
+        });
     }
 };

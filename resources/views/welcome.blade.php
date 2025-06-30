@@ -22,7 +22,7 @@
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                     <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                         <div class="flex lg:justify-center lg:col-start-2">
-                            <img src="https://raw.githubusercontent.com/ClesioGabriel/crud-playlist-musical/refs/heads/main/HitWave-removebg.png" alt="Logo Nova" class="h-12 w-auto" />
+                            <img src="https://github.com/ClesioGabriel/crud-playlist-musical/blob/main/public/images/HitWave-removebg.png?raw=true" alt="Logo Nova" class="h-12 w-auto" />
                         </div>
                         @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
@@ -38,7 +38,7 @@
                                         href="{{ route('login') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     >
-                                        Log in
+                                        Entrar
                                     </a>
 
                                     @if (Route::has('register'))
@@ -46,7 +46,7 @@
                                             href="{{ route('register') }}"
                                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                         >
-                                            Register
+                                            Cadastrar
                                         </a>
                                     @endif
                                 @endauth
@@ -72,7 +72,7 @@
                                         "
                                     />
                                     <img
-                                        src="https://raw.githubusercontent.com/ClesioGabriel/crud-playlist-musical/refs/heads/main/HitWave%20Logo.png"
+                                        src="https://github.com/ClesioGabriel/crud-playlist-musical/blob/main/public/images/HitWave%20Logo.png?raw=true"
                                         alt="Laravel documentation screenshot"
                                         class="hidden aspect-video h-full w-full flex-1 rounded-[10px] object-top object-cover drop-shadow-[0px_4px_34px_rgba(0,0,0,0.25)] dark:block"
                                     />

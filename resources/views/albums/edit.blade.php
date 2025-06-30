@@ -8,7 +8,7 @@
             Editar o Álbum {{ $album->name }}
         </h2>
     </div>
-    <form action="{{ route('albums.update', $album->id) }}" method="POST">
+    <form action="{{ route('albums.update', $album->id) }}" enctype="multipart/form-data" method="POST">
         @method('put')
         @include('albums.partials.form')
     </form>

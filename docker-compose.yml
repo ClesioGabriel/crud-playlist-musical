@@ -1,74 +1,75 @@
-  version: "3.7"
+version: "3.7"
 
-  services:
-    app:
-      build:
-        context: .
-        dockerfile: Dockerfile
-      restart: unless-stopped
-      working_dir: /var/www
-      volumes:
-        - /home/clesio/project1/laravel-10:/var/www
-        - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
-      depends_on:
-        - redis
-        - db
-      networks:
-        - laravel
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    working_dir: /var/www
+    user: "${UID}:${GID}"
+    volumes:
+      - /home/clesio/project1/laravel-10:/var/www
+      - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    depends_on:
+      - redis
+      - db
+    networks:
+      - laravel
 
-    nginx:
-      image: nginx:alpine
-      restart: unless-stopped
-      ports:
-        - "8989:80"
-      volumes:
-        - ./:/var/www
-        - ./docker/nginx/:/etc/nginx/conf.d/
-      depends_on:
-        - app
-      networks:
-        - laravel
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "8989:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    depends_on:
+      - app
+    networks:
+      - laravel
 
-    db:
-      image: mysql:5.7.22
-      restart: unless-stopped
-      environment:
-        MYSQL_DATABASE: ${DB_DATABASE:-laravel}
-        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-        MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-        MYSQL_USER: ${DB_USERNAME:-username}
-      volumes:
-        - dbdata:/var/lib/mysql
-      ports:
-        - "3388:3306"
-      networks:
-        - laravel
+  db:
+    image: mysql:5.7.22
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
+      MYSQL_USER: ${DB_USERNAME:-username}
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "8080:3306"
+    networks:
+      - laravel
 
-    redis:
-      image: redis:latest
-      restart: unless-stopped
-      networks:
-        - laravel
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    networks:
+      - laravel
 
-    phpmyadmin:
-      image: phpmyadmin/phpmyadmin
-      container_name: phpmyadmin
-      restart: unless-stopped
-      ports:
-        - "8081:80"
-      environment:
-        PMA_HOST: db
-        PMA_PORT: 3306
-        PMA_USER: ${DB_USERNAME:-root}
-        PMA_PASSWORD: ${DB_PASSWORD:-root}
-      depends_on:
-        - db
-      networks:
-        - laravel
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: ${DB_USERNAME:-root}
+      PMA_PASSWORD: ${DB_PASSWORD:-root}
+    depends_on:
+      - db
+    networks:
+      - laravel
 
-  networks:
-    laravel:
-      driver: bridge
+networks:
+  laravel:
+    driver: bridge
 
-  volumes:
-    dbdata:
+volumes:
+  dbdata:

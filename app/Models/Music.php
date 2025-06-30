@@ -21,6 +21,7 @@ class Music extends Model
         'genre',
         'file_path',
         'release_date',
+        'playlist_id',
     ];
 
     protected $casts = [
@@ -37,9 +38,9 @@ class Music extends Model
         return $this->belongsTo(Album::class);
     }
 
-    public function likes()
+    public function playlists()
     {
-        return $this->hasMany(Like::class);
+        return $this->belongsToMany(Playlist::class, 'music_playlist', 'music_id', 'playlist_id');
     }
 
 }

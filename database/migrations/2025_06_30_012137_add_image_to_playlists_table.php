@@ -9,22 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('artists', function (Blueprint $table) {
-            $table->unsignedBigInteger('album_id')->nullable();
-            $table->foreign('album_id')->references('id')->on('albums')->onDelete('set null');
+        Schema::table('playlists', function (Blueprint $table) {
+            $table->string('image')->nullable();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('artists', function (Blueprint $table) {
-            //
+        Schema::table('playlists', function (Blueprint $table) {
+            $table->dropColumn('image');
         });
     }
 };

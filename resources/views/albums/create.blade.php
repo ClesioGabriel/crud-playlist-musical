@@ -9,10 +9,8 @@
     </h2>
 </div>
 
-    <form action="{{ route('albums.store') }}" method="POST" class="space-y-4">
-        @csrf
-        @include('albums.partials.form')
-    </form>
+<form action="{{ route('albums.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+    @csrf
+    @include('albums.partials.form')
+</form>
 @endsection
-
-

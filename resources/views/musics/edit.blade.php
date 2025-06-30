@@ -10,6 +10,7 @@
     </div>
     <form action="{{ route('musics.update', $music->id) }}" method="POST">
         @method('put')
+        @csrf
         @include('musics.partials.form')
     </form>
 @endsection

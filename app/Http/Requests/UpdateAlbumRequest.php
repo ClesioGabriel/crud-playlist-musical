@@ -22,9 +22,10 @@ class UpdateAlbumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|max:255',
+            'name' => 'required|string|max:255', 
             'artist_id' => 'required|exists:artists,id',
             'genre' => 'nullable|string|max:1000',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
 }

@@ -9,14 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('albums', function (Blueprint $table) {
+        Schema::create('music_playlist', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('artist_id');
-            $table->foreign('artist_id')->references('id')->on('artists')->onDelete('cascade');
-            $table->string('genre')->nullable();
+            $table->foreignId('music_id')->constrained('musics')->onDelete('cascade');
+            $table->foreignId('playlist_id')->constrained('playlists')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('albums');
+        Schema::dropIfExists('music_playlist');
     }
 };

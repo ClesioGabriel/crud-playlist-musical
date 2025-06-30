@@ -1,10 +1,10 @@
 FROM php:8.3-fpm-alpine
 
-# set your user name, ex: user=carlos
+# Argumentos para criar usuário não-root
 ARG user=www-data
 ARG uid=1000
 
-# Install system dependencies
+# Instala dependências do sistema
 RUN apk update && apk add --no-cache \
     git \
     curl \
@@ -21,32 +21,32 @@ RUN apk update && apk add --no-cache \
     make \
     linux-headers
 
-# Install PHP extensions
+# Instala extensões PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets xml
 
-# Install Redis extension
+
+# Instala Redis no PHP
 RUN pecl install -o -f redis \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable redis
 
-# Get latest Composer
+# Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# # Create system user to run Composer and Artisan Commands
-# RUN useradd -u $uid -G www-data,root -s /bin/bash -m $user \
-#     && mkdir -p /home/$user/.composer \
-#     && chown -R $user:$user /home/$user
+RUN sed -i "s/www-data:x:82:82/www-data:x:${uid}:${uid}/" /etc/passwd /etc/group
 
-# Set working directory
+# Define diretório de trabalho
 WORKDIR /var/www
 
-COPY --chown=www-data:www-data . /var/www
+# Copia os arquivos do projeto
+COPY --chown=${user}:${user} . /var/www
 
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage \
-    && chmod -R 755 /var/www/bootstrap/cache
+# Permissões das pastas storage e bootstrap/cache
+RUN chmod -R 775 /var/www/storage \
+    && chmod -R 775 /var/www/bootstrap/cache
 
-# Copy custom configurations PHP
+# Copia configuração personalizada do PHP
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
-USER $user
+# Usa usuário não-root
+USER ${user}

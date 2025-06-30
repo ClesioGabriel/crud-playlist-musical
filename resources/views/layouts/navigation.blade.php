@@ -24,17 +24,19 @@
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                             {{ __('Usuários') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('artists.index')" :active="request()->routeIs('artists.*')">
-                            {{ __('Artistas') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('albums.index')" :active="request()->routeIs('albums.*')">
-                            {{ __('Álbuns') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('musics.index')" :active="request()->routeIs('musics.*')">
-                            {{ __('Músicas') }}
-                        </x-nav-link>
                     @endif
 
+                    <x-nav-link :href="route('artists.index')" :active="request()->routeIs('artists.*')">
+                            {{ __('Artistas') }}
+                        </x-nav-link>
+
+                    <x-nav-link :href="route('albums.index')" :active="request()->routeIs('albums.*')">
+                            {{ __('Álbuns') }}
+                        </x-nav-link>
+
+                    <x-nav-link :href="route('musics.index')" :active="request()->routeIs('musics.*')">
+                            {{ __('Músicas') }}
+                        </x-nav-link>
 
                     <x-nav-link :href="route('playlists.index')" :active="request()->routeIs('playlists.*')">
                         {{ __('Playlists') }}

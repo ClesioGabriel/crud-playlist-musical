@@ -23,9 +23,11 @@ class StoreAlbumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|max:255',
+            'name' => 'required|string|max:255',          // <<<<< adicionar required aqui
             'artist_id' => 'required|exists:artists,id',
             'genre' => 'nullable|string|max:1000',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
+
 }

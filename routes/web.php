@@ -8,10 +8,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PlaylistController;
-
-
-
-Route::post('/musics/{music}/toggle-like', [MusicController::class, 'toggleLike'])->name('musics.toggle-like');
+use App\Http\Controllers\DashboardController;
 
 
 Route::delete('/playlists/{id}', [PlaylistController::class, 'destroy'])->name('playlists.destroy');
@@ -67,9 +64,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

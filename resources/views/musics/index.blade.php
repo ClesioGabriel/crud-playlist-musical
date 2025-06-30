@@ -2,18 +2,21 @@
 
 @section('title', 'Listagem das Músicas')
 
-
 @section('content')
+
     <div class="py-6 mb-2">
 
-        <a href="{{ route('musics.create') }}">
-        <x-primary-button>
-        <i class="fa-solid fa-plus m-1"></i>Cadastrar Nova Música
-        </x-primary-button>
-        </a>
+    <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Músicas</h1>
 
-
-    </div>
+    @can('is-admin')
+        <div class="py-6 mb-2">
+            <a href="{{ route('musics.create') }}">
+                <x-primary-button>
+                    <i class="fa-solid fa-plus m-1"></i>Cadastrar Nova Música
+                </x-primary-button>
+            </a>
+        </div>
+    @endcan
 
     <x-alert />
 

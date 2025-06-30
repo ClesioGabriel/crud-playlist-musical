@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
+use App\Models\Album;
+use App\Models\Music;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,11 +14,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $favoriteMusics = $user->likedMusics()->with('artist', 'album')->get();
-
-        return view('admin.users.dashboard', compact('favoriteMusics'));
+        $artists = Artist::latest()->paginate(6);
+        $albums = Album::latest()->paginate(6);
+        return view('dashboard', [
+            'artists' => $artists,
+            'albums' => $albums
+        ]);
     }
+
 
 
     /**

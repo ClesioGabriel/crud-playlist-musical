@@ -6,6 +6,8 @@
 @section('content')
     <div class="py-6 mb-2">
 
+    <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Playlists</h1>
+
         <a href="{{ route('playlists.create') }}">
         <x-primary-button>
         <i class="fa-solid fa-plus m-1"></i>Cadastrar Nova Playlist
@@ -17,35 +19,40 @@
 
     <x-alert />
 
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-4">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-4">Título</th>
-                    <th scope="col" class="px-6 py-4">Descrição</th>
-                    <th scope="col" class="px-6 py-4">Ações</th>
-                </tr>
-            </thead>
-            <tbody class="text-gray-600 text-sm font-light">
-                @forelse ($playlists as $playlist)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                        <td class="px-6 py-4">{{ $playlist->name }}</td>
-                        <td class="px-6 py-4">{{ $playlist->description }}</td>
-                        <td class="px-6 py-4">
-                            <a href="{{ route('playlists.edit', $playlist->id) }}">Editar</a>
-                            <a href="{{ route('playlists.show', $playlist->id) }}">Detalhes</a>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center py-4">Nenhuma playlist no banco</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+    <div class="flex flex-wrap gap-6">
+        @forelse ($playlists as $playlist)
+            <div class="w-[18%] bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 flex flex-col items-center">
+                <a href="{{ route('playlists.show', $playlist->id) }}" class="block w-full">
+                    <div class="w-[200px] h-[200px] flex items-center justify-center rounded-lg overflow-hidden mb-4 border border-gray-200 dark:border-gray-700 transition-transform transition duration-200 hover:scale-105 hover:shadow-lg">
+                        @if($playlist->image)
+                            <img src="{{ $playlist->image && file_exists(public_path('storage/' . $playlist->image)) ? asset('storage/' . $playlist->image) : asset('images/default-playlist.png') }}" alt="{{ $playlist->name }}"
+                                class="object-cover w-full h-full">
+                        @else
+                            <div class="flex items-center justify-center w-full h-full bg-gray-100 dark:bg-gray-700 text-gray-400">
+                                Sem imagem
+                            </div>
+                        @endif
+                    </div>
+                </a>
+                <div class="text-center w-full">
+                    <div class="font-semibold text-lg text-gray-800 dark:text-gray-100 truncate" title="{{ $playlist->name }}">{{ $playlist->name }}</div>
+
+                    @can('is-admin')
+                    <div class="flex justify-center space-x-3 text-xs">
+                        <a href="{{ route('playlists.edit', $playlist->id) }}" class="text-gray-600 hover:underline">Editar</a>
+                    </div>
+                    @endcan
+                </div>
+            </div>
+        @empty
+            <div class="w-full text-center py-8 text-gray-500 dark:text-gray-400">
+                Nenhuma playlist no banco.
+            </div>
+        @endforelse
     </div>
 
-    <div class="py-4">
+    <div class="py-4 flex justify-center">
         {{ $playlists->links() }}
     </div>
+
 @endsection
