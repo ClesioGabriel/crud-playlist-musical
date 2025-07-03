@@ -14,7 +14,9 @@
 
             <ul class="space-y-2 list-disc list-inside text-gray-700 dark:text-gray-300">
                 <li><strong>Nome:</strong> {{ $playlist->name }}</li>
-                <li><strong>Descrição:</strong> {{ $playlist->description }}</li>
+                @if (!empty($playlist->description))
+                    <li><strong>Descrição:</strong> {{ $playlist->description }}</li>
+                @endif
             </ul>
         </div>
     </div>

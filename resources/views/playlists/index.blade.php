@@ -29,7 +29,7 @@
                                 class="object-cover w-full h-full">
                         @else
                             <div class="flex items-center justify-center w-full h-full bg-gray-100 dark:bg-gray-700 text-gray-400">
-                                Sem imagem
+                                <img src="{{ asset('storage/playlists/F1MrRPbBrDljPcTsajAXgan1VLXn5DSbfjpwjaF4.png') }}">
                             </div>
                         @endif
                     </div>
@@ -37,11 +37,10 @@
                 <div class="text-center w-full">
                     <div class="font-semibold text-lg text-gray-800 dark:text-gray-100 truncate" title="{{ $playlist->name }}">{{ $playlist->name }}</div>
 
-                    @can('is-admin')
                     <div class="flex justify-center space-x-3 text-xs">
                         <a href="{{ route('playlists.edit', $playlist->id) }}" class="text-gray-600 hover:underline">Editar</a>
                     </div>
-                    @endcan
+
                 </div>
             </div>
         @empty

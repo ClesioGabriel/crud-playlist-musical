@@ -41,6 +41,7 @@
             <option value="sertanejo" {{ (old('genre') == 'sertanejo' || ($artist->genre ?? '') == 'sertanejo') ? 'selected' : '' }}>Sertanejo</option>
             <option value="funk" {{ (old('genre') == 'funk' || ($artist->genre ?? '') == 'funk') ? 'selected' : '' }}>Funk</option>
             <option value="trap" {{ (old('genre') == 'trap' || ($artist->genre ?? '') == 'trap') ? 'selected' : '' }}>Trap</option>
+            <option value="brega" {{ (old('genre') == 'brega' || ($artist->genre ?? '') == 'brega') ? 'selected' : '' }}>Brega</option>
             <option value="other" {{ (old('genre') == 'other' || ($artist->genre ?? '') == 'other') ? 'selected' : '' }}>Other</option>
         </select>
     </div>

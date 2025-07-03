@@ -14,12 +14,12 @@
     <div class="mb-4">
         <p class="text-lg font-medium text-gray-800 dark:text-gray-200">Título: {{ $music->title }}</p>
         <p class="text-sm text-gray-600 dark:text-gray-400">Artista: {{ $music->artist->name ?? '-' }}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">Álbum: {{ $music->album->title ?? '-' }}</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400">Álbum: {{ $music->album->name ?? '-' }}</p>
         <p class="text-sm text-gray-600 dark:text-gray-400">Gênero: {{ $music->genre }}</p>
     </div>
 
     <audio controls class="w-full">
-        <source src="{{ asset($music->file_path) }}" type="audio/mpeg">
+        <source src="{{ asset('storage/' . $music->file_path) }}" type="audio/mpeg">
         Seu navegador não suporta o elemento de áudio.
     </audio>
 

@@ -17,10 +17,6 @@
 
     {{-- Imagem --}}
     <div class="mb-4">
-        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-            Imagem da Playlist
-        </label>
-
         <input
             type="file"
             name="image"
@@ -52,28 +48,39 @@
         >
     </div>
 
-    {{-- Músicas --}}
     <div class="mb-4">
-        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-            Selecione uma ou mais músicas
-        </label>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            @foreach ($musics as $music)
-                <label class="flex items-center space-x-2 p-4 rounded-lg border border-gray-300 bg-white dark:bg-gray-800">
-                    <input
-                        type="checkbox"
-                        name="music_id[]"
-                        value="{{ $music->id }}"
-                        @if( (isset($playlist) && $playlist->musics->contains($music)) || (is_array(old('music_id')) && in_array($music->id, old('music_id'))) )
-                            checked
-                        @endif
-                        class="text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500"
-                    >
-                    <span class="text-gray-900 dark:text-white">{{ $music->title }}</span>
-                </label>
-            @endforeach
-        </div>
+    <label class="mb-4 block text-gray-700 dark:text-gray-300">
+        Selecione as Músicas
+    </label>
+
+    <!-- Botão para expandir/ocultar -->
+    <button type="button"
+        onclick="document.getElementById('musics-list').classList.toggle('hidden')"
+        class="w-full px-4 py-2 mb-4 text-left bg-gray-100 dark:bg-gray-700 rounded border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none">
+        Clique para mostrar/ocultar músicas
+    </button>
+
+    <!-- Lista de músicas -->
+    <div id="musics-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4">
+        @foreach ($musics as $music)
+            <label class="flex items-center gap-4 p-4 rounded-lg border border-gray-300 bg-white dark:bg-gray-800">
+                <input
+                    type="checkbox"
+                    name="music_id[]"
+                    value="{{ $music->id }}"
+                    @if((isset($playlist) && $playlist->musics->contains($music)) || (is_array(old('music_id')) && in_array($music->id, old('music_id'))))
+                        checked
+                    @endif
+                    class="text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500"
+                >
+                <span class="text-gray-900 dark:text-white">{{ $music->title }}</span>
+            </label>
+        @endforeach
     </div>
+</div>
+
+
+
 
     {{-- Botões --}}
     <div class="flex items-center gap-4 mt-6">

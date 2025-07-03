@@ -12,12 +12,12 @@
     <div class="mb-4">
         <p class="text-lg font-medium text-gray-800 dark:text-gray-200">Título: <?php echo e($music->title); ?></p>
         <p class="text-sm text-gray-600 dark:text-gray-400">Artista: <?php echo e($music->artist->name ?? '-'); ?></p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">Álbum: <?php echo e($music->album->title ?? '-'); ?></p>
+        <p class="text-sm text-gray-600 dark:text-gray-400">Álbum: <?php echo e($music->album->name ?? '-'); ?></p>
         <p class="text-sm text-gray-600 dark:text-gray-400">Gênero: <?php echo e($music->genre); ?></p>
     </div>
 
     <audio controls class="w-full">
-        <source src="<?php echo e(asset($music->file_path)); ?>" type="audio/mpeg">
+        <source src="<?php echo e(asset('storage/' . $music->file_path)); ?>" type="audio/mpeg">
         Seu navegador não suporta o elemento de áudio.
     </audio>
 

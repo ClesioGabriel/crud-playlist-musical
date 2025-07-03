@@ -60,6 +60,7 @@
             <option value="sertanejo" <?php echo e((old('genre') == 'sertanejo' || ($artist->genre ?? '') == 'sertanejo') ? 'selected' : ''); ?>>Sertanejo</option>
             <option value="funk" <?php echo e((old('genre') == 'funk' || ($artist->genre ?? '') == 'funk') ? 'selected' : ''); ?>>Funk</option>
             <option value="trap" <?php echo e((old('genre') == 'trap' || ($artist->genre ?? '') == 'trap') ? 'selected' : ''); ?>>Trap</option>
+            <option value="brega" <?php echo e((old('genre') == 'brega' || ($artist->genre ?? '') == 'brega') ? 'selected' : ''); ?>>Brega</option>
             <option value="other" <?php echo e((old('genre') == 'other' || ($artist->genre ?? '') == 'other') ? 'selected' : ''); ?>>Other</option>
         </select>
     </div>

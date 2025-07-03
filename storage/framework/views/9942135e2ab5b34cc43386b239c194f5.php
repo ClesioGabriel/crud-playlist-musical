@@ -64,7 +64,7 @@
                                 class="object-cover w-full h-full">
                         <?php else: ?>
                             <div class="flex items-center justify-center w-full h-full bg-gray-100 dark:bg-gray-700 text-gray-400">
-                                Sem imagem
+                                <img src="<?php echo e(asset('storage/playlists/F1MrRPbBrDljPcTsajAXgan1VLXn5DSbfjpwjaF4.png')); ?>">
                             </div>
                         <?php endif; ?>
                     </div>
@@ -72,11 +72,10 @@
                 <div class="text-center w-full">
                     <div class="font-semibold text-lg text-gray-800 dark:text-gray-100 truncate" title="<?php echo e($playlist->name); ?>"><?php echo e($playlist->name); ?></div>
 
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
                     <div class="flex justify-center space-x-3 text-xs">
                         <a href="<?php echo e(route('playlists.edit', $playlist->id)); ?>" class="text-gray-600 hover:underline">Editar</a>
                     </div>
-                    <?php endif; ?>
+
                 </div>
             </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

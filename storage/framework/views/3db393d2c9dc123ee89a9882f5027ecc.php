@@ -13,7 +13,9 @@
 
             <ul class="space-y-2 list-disc list-inside text-gray-700 dark:text-gray-300">
                 <li><strong>Nome:</strong> <?php echo e($playlist->name); ?></li>
-                <li><strong>Descrição:</strong> <?php echo e($playlist->description); ?></li>
+                <?php if(!empty($playlist->description)): ?>
+                    <li><strong>Descrição:</strong> <?php echo e($playlist->description); ?></li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

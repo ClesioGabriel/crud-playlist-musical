@@ -10,14 +10,15 @@ use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\DashboardController;
 
-
-Route::delete('/playlists/{id}', [PlaylistController::class, 'destroy'])->name('playlists.destroy');
-Route::get('/playlists/create', [PlaylistController::class, 'create'])->name('playlists.create');
-Route::get('/playlists/{id}', [PlaylistController::class, 'show'])->name('playlists.show');
-Route::put('/playlists/{id}', [PlaylistController::class, 'update'])->name('playlists.update');
-Route::get('/playlists/{id}/edit', [PlaylistController::class, 'edit'])->name('playlists.edit');
-Route::post('/playlists/store', [PlaylistController::class, 'store'])->name('playlists.store');
-Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
+Route::middleware('auth')->group(function () {
+    Route::delete('/playlists/{id}', [PlaylistController::class, 'destroy'])->name('playlists.destroy');
+    Route::get('/playlists/create', [PlaylistController::class, 'create'])->name('playlists.create');
+    Route::get('/playlists/{id}', [PlaylistController::class, 'show'])->name('playlists.show');
+    Route::put('/playlists/{id}', [PlaylistController::class, 'update'])->name('playlists.update');
+    Route::get('/playlists/{id}/edit', [PlaylistController::class, 'edit'])->name('playlists.edit');
+    Route::post('/playlists/store', [PlaylistController::class, 'store'])->name('playlists.store');
+    Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::post('/musics/{id}/like', [MusicController::class, 'toggleLike'])->name('musics.like');
