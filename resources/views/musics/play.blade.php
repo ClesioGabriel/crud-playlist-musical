@@ -23,12 +23,21 @@
         Seu navegador não suporta o elemento de áudio.
     </audio>
 
-    <div class="mt-6">
+    <div class="mt-6 flex justify-between items-center">
+        
+        <form action="{{ route('musics.like', $music->id) }}" method="POST" class="inline">
+            @csrf
+            <x-primary-button>
+                {{ $music->playlists->contains(fn($p) => $p->name === 'Curtidas') ? 'Descurtir' : 'Curtir' }}
+            </x-primary-button>
+        </form>
+        
         <a href="{{ route('musics.index') }}">
             <x-primary-button>
                 {{ __('Voltar') }}
             </x-primary-button>
         </a>
+
     </div>
 </div>
 @endsection

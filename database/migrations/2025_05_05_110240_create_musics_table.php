@@ -22,8 +22,8 @@ return new class extends Migration
             $table->foreign('album_id')->references('id')->on('albums')->onDelete('set null');
 
             $table->string('genre');
-            $table->text('file_path');
-            $table->date('release_date');
+            $table->text('file_path')->nullable();
+            $table->date('release_date')->nullable();
             $table->timestamps();
         });
         

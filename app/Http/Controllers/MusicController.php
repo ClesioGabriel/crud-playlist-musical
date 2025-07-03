@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Music;
+use App\Models\Playlist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMusicRequest;
 use App\Http\Requests\UpdateMusicRequest;
@@ -134,20 +136,21 @@ class MusicController extends Controller
 
     public function toggleLike($musicId)
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $music = Music::findOrFail($musicId);
 
-        $existingLike = $music->likes()->where('user_id', $user->id)->first();
+        $likedPlaylist = $user->playlists()->firstOrCreate(
+            ['name' => 'Curtidas'],
+            ['description' => 'Músicas curtidas pelo usuário']
+        );
 
-        if ($existingLike) {
-            $existingLike->delete();
-            $liked = false;
+        if ($likedPlaylist->musics->contains($music)) {
+            $likedPlaylist->musics()->detach($music->id);
         } else {
-            $music->likes()->create(['user_id' => $user->id]);
-            $liked = true;
+            $likedPlaylist->musics()->attach($music->id);
         }
 
-        return response()->json(['liked' => $liked]);
+        return redirect()->back()->with('success', 'Atualizado com sucesso.');
     }
 
     public function dashboard()

@@ -25,9 +25,9 @@
 
     <div class="flex flex-wrap gap-6">
         <?php $__empty_1 = true; $__currentLoopData = $artists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $artist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-            <div class="w-[18%] bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 flex flex-col items-center">
+            <div>
                 <a href="<?php echo e(route('artists.show', $artist->id)); ?>" class="block w-full">
-                    <div class="w-full h-48 mb-4 relative overflow-hidden rounded-lg">
+                    <div class="w-24 h-24 mb-4 relative overflow-hidden rounded-full border border-gray-300 dark:border-gray-600">
                         <?php if($artist->image): ?>
                             <img src="<?php echo e(asset('storage/' . $artist->image)); ?>" alt="<?php echo e($artist->name); ?>" class="object-cover w-full h-full">
                         <?php else: ?>

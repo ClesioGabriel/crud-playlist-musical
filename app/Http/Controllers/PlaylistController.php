@@ -8,12 +8,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePlaylistRequest;
 use App\Http\Requests\UpdatePlaylistRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller
 {
     public function index()
     {
-        $playlists = Playlist::paginate(15);
+        $user = Auth::user();
+        $playlists = $user->playlists()->with('musics')->paginate(10);
+        
         return view('playlists.index', compact('playlists'));
     }
 
@@ -25,7 +28,7 @@ class PlaylistController extends Controller
 
     public function store(StorePlaylistRequest $request)
     {
-        $playlist = Playlist::create($request->validated());
+        $playlist = Auth::user()->playlists()->create($request->validated());
 
         // Salva imagem
         if ($request->hasFile('image')) {

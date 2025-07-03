@@ -8,7 +8,7 @@
             Editar a Música {{ $music->name }}
         </h2>
     </div>
-    <form action="{{ route('musics.update', $music->id) }}" method="POST">
+    <form action="{{ route('musics.update', $music->id) }}" method="POST" enctype="multipart/form-data">
         @method('put')
         @csrf
         @include('musics.partials.form')

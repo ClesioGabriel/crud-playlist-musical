@@ -48,9 +48,9 @@ class User extends Authenticatable
         return in_array($this->email, config('custom.admins'));
     } 
 
-    public function likedMusics()
+    public function playlists()
     {
-        return $this->belongsToMany(Music::class, 'likes')->withTimestamps();
+        return $this->hasMany(\App\Models\Playlist::class);
     }
 
 }

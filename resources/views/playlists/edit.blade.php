@@ -8,7 +8,7 @@
             Editar a Playlist {{ $playlist->name }}
         </h2>
     </div>
-    <form action="{{ route('playlists.update', $playlist->id) }}" method="POST">
+    <form action="{{ route('playlists.update', $playlist->id) }}" method="POST" enctype="multipart/form-data">
         @method('put')
         @include('playlists.partials.form')
     </form>

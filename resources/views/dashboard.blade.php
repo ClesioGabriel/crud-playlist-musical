@@ -27,9 +27,9 @@
 
     <div class="flex flex-wrap gap-6">
         @forelse ($artists as $artist)
-            <div class="w-[18%] bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 flex flex-col items-center">
+            <div>
                 <a href="{{ route('artists.show', $artist->id) }}" class="block w-full">
-                    <div class="w-full h-48 mb-4 relative overflow-hidden rounded-lg">
+                    <div class="w-24 h-24 mb-4 relative overflow-hidden rounded-full border border-gray-300 dark:border-gray-600">
                         @if($artist->image)
                             <img src="{{ asset('storage/' . $artist->image) }}" alt="{{ $artist->name }}" class="object-cover w-full h-full">
                         @else

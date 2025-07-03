@@ -13,6 +13,7 @@ class Playlist extends Model
         'name',
         'image',
         'description',
+        'user_id',
     ];
 
 

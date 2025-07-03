@@ -43,24 +43,35 @@ class ArtistController extends Controller
 
 
     public function edit(string $id)
-{
-    $artist = Artist::findOrFail($id);
-    $albums = Album::all();
+    {
+        $artist = Artist::findOrFail($id);
+        $albums = Album::all();
 
-    return view('artists.edit', compact('artist', 'albums'));
-}
+        return view('artists.edit', compact('artist', 'albums'));
+    }
 
 
     public function update(UpdateArtistRequest $request, string $id)
     {
         $artist = Artist::findOrFail($id);
-    
-        $artist->update($request->validated());
-    
+        $data = $request->validated();
+
+        // Se enviou uma nova imagem válida
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            // Armazena a nova imagem
+            $image = $request->file('image')->store('artists', 'public');
+            $data['image'] = $image;
+        }
+
+        // Atualiza o artista com os dados (incluindo imagem nova, se houver)
+        $artist->update($data);
+
         return redirect()
             ->route('artists.index')
             ->with('success', 'Artista atualizado com sucesso.');
     }
+
     
 
     public function show(string $id)

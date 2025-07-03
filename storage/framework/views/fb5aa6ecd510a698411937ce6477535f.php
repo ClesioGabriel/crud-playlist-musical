@@ -7,7 +7,7 @@
 
         </h2>
     </div>
-    <form action="<?php echo e(route('playlists.update', $playlist->id)); ?>" method="POST">
+    <form action="<?php echo e(route('playlists.update', $playlist->id)); ?>" method="POST" enctype="multipart/form-data">
         <?php echo method_field('put'); ?>
         <?php echo $__env->make('playlists.partials.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </form>

@@ -55,52 +55,34 @@
 <?php unset($__componentOriginal5194778a3a7b899dcee5619d0610f5cf); ?>
 <?php endif; ?>
 
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-4">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-4">Imagem</th>
-                    <th scope="col" class="px-6 py-4">Nome</th>
-                    <th scope="col" class="px-6 py-4">Álbum</th>
-                    <th scope="col" class="px-6 py-4">Gênero</th>
-                    <th scope="col" class="px-6 py-4">Ações</th>
-                </tr>
-            </thead>
-            <tbody class="text-gray-600 text-sm font-light">
-                <?php $__empty_1 = true; $__currentLoopData = $artists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $artist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-
-                        <td class="px-6 py-4 flex justify-center items-center">
-                            <?php if($artist->image): ?>
-                                <img src="<?php echo e(asset('storage/' . $artist->image)); ?>"  class="w-16 h-16 rounded-full object-cover" style="max-width: 100px; max-height: 100px;">
-                            <?php else: ?>
-                                <span>Sem imagem</span>
-                            <?php endif; ?>
-                        </td>
-
-                        <td class="px-6 py-4"><?php echo e($artist->name); ?></td>
-                        <td class="px-6 py-4">
-                            <?php if($artist->albums->isNotEmpty()): ?>
-                                <?php $__currentLoopData = $artist->albums; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $album): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <span class="block"><?php echo e($album->name); ?></span>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            <?php else: ?>
-                                Nenhum álbum associado
-                            <?php endif; ?>
-                        </td>
-                        <td class="px-6 py-4"><?php echo e($artist->genre); ?></td>
-                        <td class="px-6 py-4">
-                            <a href="<?php echo e(route('artists.edit', $artist->id)); ?>">Editar</a>
-                            <a href="<?php echo e(route('artists.show', $artist->id)); ?>">Detalhes</a>
-                        </td>
-                    </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    <tr>
-                        <td colspan="4" class="text-center py-4">Nenhum artista no banco</td>
-                    </tr>
+    <div class="flex flex-wrap gap-6">
+        <?php $__empty_1 = true; $__currentLoopData = $artists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $artist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+            <div>
+                <a href="<?php echo e(route('artists.show', $artist->id)); ?>" class="block w-full">
+                    <div class="w-24 h-24 mb-4 relative overflow-hidden rounded-full border border-gray-300 dark:border-gray-600">
+                        <?php if($artist->image): ?>
+                            <img src="<?php echo e(asset('storage/' . $artist->image)); ?>" alt="<?php echo e($artist->name); ?>" class="object-cover w-full h-full">
+                        <?php else: ?>
+                            <div class="flex items-center justify-center w-full h-full bg-gray-100 dark:bg-gray-700 text-gray-400">
+                                Sem imagem
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </a>
+                <div class="text-center w-full">
+                    <div class="font-semibold text-lg text-gray-800 dark:text-gray-100 truncate"><?php echo e($artist->name); ?></div>
+                </div>
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
+                    <div class="flex justify-center space-x-3 text-xs">
+                        <a href="<?php echo e(route('artists.edit', $artist->id)); ?>" class="text-gray-600 hover:underline">Editar</a>
+                    </div>
                 <?php endif; ?>
-            </tbody>
-        </table>
+            </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+            <div class="w-full text-center text-gray-500 dark:text-gray-400">
+                Nenhum artista cadastrado.
+            </div>
+        <?php endif; ?>
     </div>
 
     <div class="py-4">

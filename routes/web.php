@@ -19,6 +19,9 @@ Route::get('/playlists/{id}/edit', [PlaylistController::class, 'edit'])->name('p
 Route::post('/playlists/store', [PlaylistController::class, 'store'])->name('playlists.store');
 Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
 
+Route::middleware('auth')->group(function () {
+    Route::post('/musics/{id}/like', [MusicController::class, 'toggleLike'])->name('musics.like');
+});
 
 Route::get('/musics/{id}/play', [MusicController::class, 'play'])->name('musics.play');
 Route::delete('/musics/{id}', [MusicController::class, 'destroy'])->name('musics.destroy');
