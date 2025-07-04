@@ -8,6 +8,14 @@
 
     <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Playlists</h1>
 
+    <div class="py-4">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <p class="text-gray-600 dark:text-gray-400">
+                No <strong>HitWave</strong>, as playlists são feitas para acompanhar cada momento do seu dia. Descubra seleções personalizadas, crie suas próprias combinações e compartilhe sua vibe com o mundo — tudo com apenas alguns cliques.
+            </p>
+        </div>
+    </div>
+
         <a href="{{ route('playlists.create') }}">
         <x-primary-button>
         <i class="fa-solid fa-plus m-1"></i>Cadastrar Nova Playlist

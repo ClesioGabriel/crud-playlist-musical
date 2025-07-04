@@ -6,6 +6,14 @@
 
     <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Artistas</h1>
 
+    <div class="py-4">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <p class="text-gray-600 dark:text-gray-400">
+                Conheça os artistas no <strong>HitWave</strong> e descubra quem está por trás das músicas que você ama. Acompanhe discografias, biografias e novidades dos seus músicos favoritos — tudo em um só lugar, com praticidade e estilo.
+            </p>
+        </div>
+    </div>
+
     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
         <div class="py-6 mb-2">
             <a href="<?php echo e(route('artists.create')); ?>">

@@ -6,6 +6,15 @@
 
     <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Álbuns</h1>
 
+    <div class="py-4">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <p class="text-gray-600 dark:text-gray-400">
+                Explore os álbuns no <strong>HitWave</strong> e mergulhe em coleções musicais que contam histórias, marcam gerações e revelam novos talentos.
+                Cada álbum é uma experiência completa, cuidadosamente organizada para você ouvir do início ao fim com qualidade e estilo.
+            </p>
+        </div>
+    </div>
+
     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
         <div class="py-6 mb-2">
             <a href="<?php echo e(route('albums.create')); ?>">

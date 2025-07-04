@@ -6,6 +6,16 @@
 
     <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Músicas</h1>
 
+    <div class="py-4">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <p class="text-gray-600 dark:text-gray-400">
+                No <strong>HitWave</strong>, você tem acesso a uma jornada musical única: descubra novos sons, reviva clássicos e monte playlists que combinam com cada momento do seu dia.
+                Tudo isso com uma interface intuitiva, rápida e pensada para quem realmente vive a música.
+            </p>
+        </div>
+    </div>
+
+
     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
         <div class="py-6 mb-2">
             <a href="<?php echo e(route('musics.create')); ?>">
@@ -74,7 +84,9 @@
                         <td class="px-6 py-4"><?php echo e($music->album->name ?? 'Álbum não encontrado'); ?></td>
                         <td class="px-6 py-4"><?php echo e($music->genre); ?></td>
                         <td class="px-6 py-4">
+                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
                             <a href="<?php echo e(route('musics.edit', $music->id)); ?>">Editar</a>
+                            <?php endif; ?>
                             <a href="<?php echo e(route('musics.show', $music->id)); ?>">Detalhes</a>
                             <a href="<?php echo e(route('musics.play', $music->id)); ?>">Tocar</a>
                         </td>
