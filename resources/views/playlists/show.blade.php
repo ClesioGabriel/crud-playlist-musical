@@ -57,7 +57,6 @@
             </x-primary-button>
         </a>
 
-        @can('is-admin')
             <form action="{{ route('playlists.destroy', $playlist->id) }}" method="POST"
                 onsubmit="return confirm('Tem certeza que deseja deletar?')">
                 @csrf
@@ -66,7 +65,6 @@
                     {{ __('Deletar Playlist') }}
                 </x-danger-button>
             </form>
-        @endcan
     </div>
 
 @endsection

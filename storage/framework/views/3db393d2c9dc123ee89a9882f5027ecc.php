@@ -96,7 +96,6 @@
 <?php endif; ?>
         </a>
 
-        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
             <form action="<?php echo e(route('playlists.destroy', $playlist->id)); ?>" method="POST"
                 onsubmit="return confirm('Tem certeza que deseja deletar?')">
                 <?php echo csrf_field(); ?>
@@ -124,7 +123,6 @@
 <?php unset($__componentOriginal656e8c5ea4d9a4fa173298297bfe3f11); ?>
 <?php endif; ?>
             </form>
-        <?php endif; ?>
     </div>
 
 <?php $__env->stopSection(); ?>
