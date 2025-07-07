@@ -4,12 +4,12 @@
 
     <div class="py-6 mb-2">
 
-    <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Músicas</h1>
+    <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 mb-4" style="font-family: 'Inter', 'Segoe UI', Arial, sans-serif;">MÚSICAS</h1>
 
     <div class="py-4">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <p class="text-gray-600 dark:text-gray-400">
-                No <strong>HitWave</strong>, você tem acesso a uma jornada musical única: descubra novos sons, reviva clássicos e monte playlists que combinam com cada momento do seu dia.
+            <p class="text-gray-900 dark:text-gray-100">
+                No <strong>HitWave</strong>, você tem acesso a uma jornada musical única: descubrindo novos sons e revivendo clássicos que combinam com cada momento do seu dia.
                 Tudo isso com uma interface intuitiva, rápida e pensada para quem realmente vive a música.
             </p>
         </div>
@@ -65,40 +65,60 @@
 <?php unset($__componentOriginal5194778a3a7b899dcee5619d0610f5cf); ?>
 <?php endif; ?>
 
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-4">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div class="bg-gray-100 dark:bg-gray-900 overflow-hidden shadow-lg sm:rounded-xl p-6">
+        <table class="w-full text-sm text-center text-gray-800 dark:text-white">
+            <thead class="text-xs uppercase bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                 <tr>
-                    <th scope="col" class="px-6 py-4">Título</th>
-                    <th scope="col" class="px-6 py-4">Artista</th>
-                    <th scope="col" class="px-6 py-4">Álbum</th>
-                    <th scope="col" class="px-6 py-4">Gênero</th>
-                    <th scope="col" class="px-6 py-4">Ações</th>
+                    <th class="px-6 py-3">#</th>
+                    <th class="px-6 py-3">Título</th>
+                    <th class="px-6 py-3">Artista</th>
+                    <th class="px-6 py-3">Álbum</th>
+                    <th class="px-6 py-3">Gênero</th>
+                    <th class="px-6 py-3">Ações</th>
                 </tr>
             </thead>
-            <tbody class="text-gray-600 text-sm font-light">
-                <?php $__empty_1 = true; $__currentLoopData = $musics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $music): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                        <td class="px-6 py-4"><?php echo e($music->title); ?></td>
-                        <td><?php echo e($music->artist->name ?? 'Artista não encontrado'); ?></td>
-                        <td class="px-6 py-4"><?php echo e($music->album->name ?? 'Álbum não encontrado'); ?></td>
-                        <td class="px-6 py-4"><?php echo e($music->genre); ?></td>
-                        <td class="px-6 py-4">
-                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
-                            <a href="<?php echo e(route('musics.edit', $music->id)); ?>">Editar</a>
-                            <?php endif; ?>
-                            <a href="<?php echo e(route('musics.show', $music->id)); ?>">Detalhes</a>
-                            <a href="<?php echo e(route('musics.play', $music->id)); ?>">Tocar</a>
+            <tbody>
+                <?php $__empty_1 = true; $__currentLoopData = $musics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $music): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <tr 
+                        class="border-b border-gray-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-150 text-center cursor-pointer"
+                        onclick="window.location='<?php echo e(route('musics.play', $music->id)); ?>'"
+                    >
+                        <td class="px-6 py-6"><?php echo e($musics->firstItem() + $index); ?></td>
+                        <td class="px-6 py-6 text-left"><?php echo e($music->title); ?></td>
+                        <td class="px-6 py-6 text-left"><?php echo e($music->artist->name ?? 'Artista não encontrado'); ?></td>
+                        <td class="px-6 py-6 text-left"><?php echo e($music->album->name ?? 'Álbum não encontrado'); ?></td>
+                        <td class="px-6 py-6 text-left"><?php echo e($music->genre); ?></td>
+                        <td class="px-6 py-6">
+                            <div class="flex justify-center gap-4">
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('is-admin')): ?>
+                                    <a href="<?php echo e(route('musics.edit', $music->id)); ?>" 
+                                        onclick="event.stopPropagation();"
+                                        class="inline-flex items-center justify-center gap-1 min-w-[100px] px-3 py-1 border border-gray-900 dark:border-gray-100 text-gray-900 dark:text-gray-100 rounded-md text-sm hover:border-white hover:text-white transition">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        Editar
+                                    </a>
+                                <?php endif; ?>
+
+                                <a href="<?php echo e(route('musics.show', $music->id)); ?>" 
+                                    onclick="event.stopPropagation();"
+                                    class="inline-flex items-center justify-center gap-1 min-w-[100px] px-3 py-1 border border-gray-900 dark:border-gray-100 text-gray-900 dark:text-gray-100 rounded-md text-sm hover:border-white hover:text-white transition">
+                                    <i class="fa-solid fa-eye"></i>
+                                    Detalhes
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr>
-                        <td colspan="4" class="text-center py-4" >Nenhuma música no banco</td>
+                        <td colspan="6" class="text-center py-6 text-gray-400 dark:text-gray-300">
+                            Nenhuma música no banco
+                        </td>
                     </tr>
                 <?php endif; ?>
             </tbody>
         </table>
     </div>
+
 
     <div class="py-4">
         <?php echo e($musics->links()); ?>

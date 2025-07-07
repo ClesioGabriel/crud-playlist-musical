@@ -36,7 +36,7 @@
             <x-primary-button>
                 {{ __('Voltar') }}
             </x-primary-button>
-        </a>
+        </a>    
 
     </div>
 </div>

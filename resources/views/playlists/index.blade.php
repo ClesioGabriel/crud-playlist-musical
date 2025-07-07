@@ -6,11 +6,11 @@
 @section('content')
     <div class="py-6 mb-2">
 
-    <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Playlists</h1>
+    <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 mb-4" style="font-family: 'Inter', 'Segoe UI', Arial, sans-serif;">PLAYLISTS</h1>
 
     <div class="py-4">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <p class="text-gray-600 dark:text-gray-400">
+            <p class="text-gray-900 dark:text-gray-100">
                 No <strong>HitWave</strong>, as playlists são feitas para acompanhar cada momento do seu dia. Descubra seleções personalizadas, crie suas próprias combinações e compartilhe sua vibe com o mundo — tudo com apenas alguns cliques.
             </p>
         </div>

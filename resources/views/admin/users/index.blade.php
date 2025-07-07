@@ -17,28 +17,45 @@
 
     <x-alert />
 
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-4">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div class="bg-gray-100 dark:bg-gray-900 overflow-hidden shadow-lg sm:rounded-xl p-6">
+        <table class="w-full text-sm text-center text-gray-800 dark:text-white">
+            <thead class="text-xs uppercase bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                 <tr>
-                    <th scope="col" class="px-6 py-4">Nome</th>
-                    <th scope="col" class="px-6 py-4">E-mail</th>
-                    <th scope="col" class="px-6 py-4">Ações</th>
+                    <th class="px-6 py-3">#</th>
+                    <th class="px-6 py-3 text-left">Nome</th>
+                    <th class="px-6 py-3 text-left">E-mail</th>
+                    <th class="px-6 py-3">Ações</th>
                 </tr>
             </thead>
-            <tbody class="text-gray-600 text-sm font-light">
-                @forelse ($users as $user)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                        <td class="px-6 py-4">{{ $user->name }}</td>
-                        <td class="px-6 py-4">{{ $user->email }}</td>
-                        <td class="px-6 py-4">
-                            <a href="{{ route('users.edit', $user->id) }}">Editar</a>
-                            <a href="{{ route('users.show', $user->id) }}">Detalhes</a>
+            <tbody>
+                @forelse ($users as $index => $user)
+                    <tr class="border-b border-gray-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-150 text-center">
+                        <td class="px-6 py-6">{{ $users->firstItem() + $index }}</td>
+                        <td class="px-6 py-6 text-left">{{ $user->name }}</td>
+                        <td class="px-6 py-6 text-left">{{ $user->email }}</td>
+                        <td class="px-6 py-6">
+                            <div class="flex justify-center gap-4">
+                                <a href="{{ route('users.edit', $user->id) }}" 
+                                onclick="event.stopPropagation();"
+                                class="inline-flex items-center justify-center gap-1 min-w-[100px] px-3 py-1 border border-gray-900 dark:border-gray-100 text-gray-900 dark:text-gray-100 rounded-md text-sm hover:border-white hover:text-white transition">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Editar
+                                </a>
+
+                                <a href="{{ route('users.show', $user->id) }}" 
+                                onclick="event.stopPropagation();"
+                                class="inline-flex items-center justify-center gap-1 min-w-[100px] px-3 py-1 border border-gray-900 dark:border-gray-100 text-gray-900 dark:text-gray-100 rounded-md text-sm hover:border-white hover:text-white transition">
+                                    <i class="fa-solid fa-eye"></i>
+                                    Detalhes
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="text-center py-4">Nenhum usuário no banco</td>
+                        <td colspan="4" class="text-center py-6 text-gray-400 dark:text-gray-300">
+                            Nenhum usuário no banco
+                        </td>
                     </tr>
                 @endforelse
             </tbody>

@@ -4,16 +4,16 @@
 
 <div class="py-6 mb-2">
 
-<h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
+<h1 class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 mb-4" style="font-family: 'Inter', 'Segoe UI', Arial, sans-serif;">
      <?php if(auth()->guard()->check()): ?>
-        Bem-vindo, <?php echo e(Auth::user()->name); ?>!
+        Bom te ver, <?php echo e(Auth::user()->name); ?>! 
     <?php endif; ?>
 </h1>
 
 
 <div class="py-4">
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-gray-900 dark:text-gray-100">
             O <strong>HitWave</strong> é a melhor forma de escutar seus artistas preferidos, explorar álbuns incríveis e curtir músicas com facilidade e qualidade.
             Uma plataforma feita para quem ama música, com uma experiência leve, moderna e organizada.
         </p>

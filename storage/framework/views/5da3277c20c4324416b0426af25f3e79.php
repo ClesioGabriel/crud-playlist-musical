@@ -4,11 +4,11 @@
 
     <div class="py-6 mb-2">
 
-    <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Artistas</h1>
+    <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 mb-4" style="font-family: 'Inter', 'Segoe UI', Arial, sans-serif;">ARTISTAS</h1>
 
     <div class="py-4">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <p class="text-gray-600 dark:text-gray-400">
+            <p class="text-gray-900 dark:text-gray-100">
                 Conheça os artistas no <strong>HitWave</strong> e descubra quem está por trás das músicas que você ama. Acompanhe discografias, biografias e novidades dos seus músicos favoritos — tudo em um só lugar, com praticidade e estilo.
             </p>
         </div>
@@ -62,6 +62,8 @@
 <?php $component = $__componentOriginal5194778a3a7b899dcee5619d0610f5cf; ?>
 <?php unset($__componentOriginal5194778a3a7b899dcee5619d0610f5cf); ?>
 <?php endif; ?>
+
+    <div class="py-6 mb-2">
 
     <div class="flex flex-wrap gap-6">
         <?php $__empty_1 = true; $__currentLoopData = $artists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $artist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
