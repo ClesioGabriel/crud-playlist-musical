@@ -25,12 +25,26 @@
 
     <div class="mt-6 flex justify-between items-center">
         
-        <form action="{{ route('musics.like', $music->id) }}" method="POST" class="inline">
-            @csrf
-            <x-primary-button>
-                {{ $music->playlists->contains(fn($p) => $p->name === 'Curtidas') ? 'Descurtir' : 'Curtir' }}
-            </x-primary-button>
-        </form>
+
+
+    <div>
+        @if(in_array($music->id, $likedMusicIds))
+            <!-- Botão de Descurtir -->
+            <form action="{{ route('musics.unlike', $music->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <x-primary-button class="text-red-500" type="submit">Descurtir</x-primary-button>
+            </form>
+        @else
+            <!-- Botão de Curtir -->
+            <form action="{{ route('musics.like', $music->id) }}" method="POST">
+                @csrf
+                <x-primary-button class="text-blue-500" type="submit">Curtir</x-primary-button>
+            </form>
+        @endif
+    </div>
+
+
         
         <a href="{{ route('musics.index') }}">
             <x-primary-button>

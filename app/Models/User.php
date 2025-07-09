@@ -53,4 +53,12 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\Playlist::class);
     }
 
+    public function likedMusics()
+    {
+        $playlist = $this->playlists()->where('name', 'Curtidas')->first();
+
+        return $playlist ? $playlist->musics() : collect();
+    }
+
+
 }

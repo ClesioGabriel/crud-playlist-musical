@@ -113,6 +113,11 @@ class AlbumController extends Controller
                 ->with('warning', 'Álbum não encontrado.');
         }
 
+        if ($album->musics()->exists()) {
+            return redirect()->route('albums.index')
+                ->with('error', 'Não é possível deletar um álbum que possui músicas associadas.');
+        }
+
         $album->delete();
 
         return redirect()

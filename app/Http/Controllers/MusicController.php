@@ -17,7 +17,11 @@ class MusicController extends Controller
     public function index()
     {
         $musics = Music::paginate(15);
-        return view('musics.index', compact('musics'));
+
+        $likedPlaylist = auth()->user()->playlists()->where('name', 'Curtidas')->first();
+        $likedMusicIds = auth()->user()->likedMusics()->pluck('music_id')->toArray();
+
+        return view('musics.index', compact('musics', 'likedMusicIds'));
     }
 
     public function create()
@@ -113,9 +117,13 @@ class MusicController extends Controller
             return redirect()->route('musics.index')->with('warning', 'Música não encontrada.');
         }
 
-        // Deleta o arquivo
         if ($music->file_path && Storage::exists(str_replace('storage/', 'public/', $music->file_path))) {
             Storage::delete(str_replace('storage/', 'public/', $music->file_path));
+        }
+
+        if ($music->playlists()->exists()) {
+            return redirect()->route('musics.index')
+                ->with('error', 'Não é possível deletar uma música que está em uma playlist.');
         }
 
         $music->delete();
@@ -129,29 +137,44 @@ class MusicController extends Controller
             return redirect()->route('musics.index')->with('warning', 'Música não encontrada.');
         }
 
+        $likedMusicIds = auth()->user()->likedMusics()->pluck('music_id')->toArray();
+
         $musics = Music::paginate(10);
 
-        return view('musics.play', compact('music'));
+        return view('musics.play', compact('music', 'likedMusicIds'));
     }
 
-    public function toggleLike($musicId)
+    public function like(Music $music)
     {
-        $user = Auth::user();
-        $music = Music::findOrFail($musicId);
+        $user = auth()->user();
 
         $likedPlaylist = $user->playlists()->firstOrCreate(
             ['name' => 'Curtidas'],
             ['description' => 'Músicas curtidas pelo usuário']
         );
 
-        if ($likedPlaylist->musics->contains($music)) {
-            $likedPlaylist->musics()->detach($music->id);
-        } else {
+        if (!$likedPlaylist->musics->contains($music->id)) {
             $likedPlaylist->musics()->attach($music->id);
         }
 
-        return redirect()->back()->with('success', 'Atualizado com sucesso.');
+        return back()->with('success', 'Música curtida e adicionada à playlist Curtidas!');
     }
+
+
+    public function unlike(Music $music)
+    {
+        $user = auth()->user();
+
+        $likedPlaylist = $user->playlists()->where('name', 'Curtidas')->first();
+
+        if ($likedPlaylist) {
+            $likedPlaylist->musics()->detach($music->id);
+        }
+
+        return back()->with('success', 'Música removida da playlist Curtidas!');
+    }
+
+
 
     public function dashboard()
     {

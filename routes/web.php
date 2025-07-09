@@ -20,9 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::post('/musics/{id}/like', [MusicController::class, 'toggleLike'])->name('musics.like');
-});
+Route::post('/musics/{music}/like', [MusicController::class, 'like'])->name('musics.like');
+Route::delete('/musics/{music}/unlike', [MusicController::class, 'unlike'])->name('musics.unlike');
 
 Route::get('/musics/{id}/play', [MusicController::class, 'play'])->name('musics.play');
 Route::delete('/musics/{id}', [MusicController::class, 'destroy'])->name('musics.destroy');
