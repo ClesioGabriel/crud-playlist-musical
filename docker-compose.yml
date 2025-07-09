@@ -9,7 +9,7 @@ services:
     working_dir: /var/www
     user: "${UID}:${GID}"
     volumes:
-      - /home/clesio/project1/laravel-10:/var/www
+      - .:/var/www
       - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     depends_on:
       - redis
@@ -21,9 +21,9 @@ services:
     image: nginx:alpine
     restart: unless-stopped
     ports:
-      - "9000:80"
+      - "9001:80"
     volumes:
-      - ./:/var/www
+      - .:/var/www
       - ./docker/nginx/:/etc/nginx/conf.d/
     depends_on:
       - app
@@ -34,16 +34,16 @@ services:
     image: mysql:5.7.22
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-      MYSQL_USER: ${DB_USERNAME:-username}
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
     volumes:
       - dbdata:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - "3308:3306"
     networks:
       - laravel
+
 
   redis:
     image: redis:latest
@@ -56,12 +56,12 @@ services:
     container_name: phpmyadmin
     restart: unless-stopped
     ports:
-      - "8082:80"
+      - "8083:80"
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      PMA_USER: ${DB_USERNAME:-root}
-      PMA_PASSWORD: ${DB_PASSWORD:-root}
+      PMA_USER: root
+      PMA_PASSWORD: root
     depends_on:
       - db
     networks:
