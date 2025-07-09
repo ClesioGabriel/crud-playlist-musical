@@ -29,7 +29,7 @@
                 @endif
 
                 <li><strong>Gênero Musical:</strong> {{ $artist->genre }}</li>
-                <li><strong>Data de Nascimento:</strong> {{ $artist->birth_date }}</li>
+                <li><strong>Data de Nascimento:</strong> {{ \Carbon\Carbon::parse($artist->birth_date)->format('d/m/Y') }}</li>
             </ul>
         </div>
     </div>

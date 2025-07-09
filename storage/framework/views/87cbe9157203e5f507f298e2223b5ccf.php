@@ -28,7 +28,7 @@
                 <?php endif; ?>
 
                 <li><strong>Gênero Musical:</strong> <?php echo e($artist->genre); ?></li>
-                <li><strong>Data de Nascimento:</strong> <?php echo e($artist->birth_date); ?></li>
+                <li><strong>Data de Nascimento:</strong> <?php echo e(\Carbon\Carbon::parse($artist->birth_date)->format('d/m/Y')); ?></li>
             </ul>
         </div>
     </div>

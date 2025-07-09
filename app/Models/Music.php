@@ -45,7 +45,8 @@ class Music extends Model
 
     public function likedByUsers()
     {
-        return $this->belongsToMany(User::class, 'music_users_likes')->withTimestamps();
+        return $this->belongsToMany(User::class, 'music_users_likes', 'music_id', 'user_id')->withTimestamps();
     }
+
 
 }
