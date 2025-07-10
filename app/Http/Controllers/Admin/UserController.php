@@ -87,6 +87,13 @@ class UserController extends Controller
                 ->with('warning', 'Você não pode deletar sua própria conta.');
         }
 
+        if ($user->playlists()->exists()) {
+            return redirect()
+                ->route('users.index')
+                ->with('error', 'Usuário não pode ser deletado, pois possui playlists associadas.');
+        }
+
+
         $user->delete();
 
         return redirect()
