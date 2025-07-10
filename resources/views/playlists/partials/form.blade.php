@@ -53,17 +53,21 @@
         Selecione as Músicas
     </label>
 
-    <!-- Botão para expandir/ocultar -->
-    <button type="button"
-        onclick="document.getElementById('musics-list').classList.toggle('hidden')"
-        class="w-full px-4 py-2 mb-4 text-left bg-gray-100 dark:bg-gray-700 rounded border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:outline-none">
-        Clique para mostrar/ocultar músicas
-    </button>
+    <div class="mb-4">
+        <input
+            type="text"
+            id="music-search"
+            placeholder="Buscar músicas ou artistas..."
+            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-white text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            onkeyup="filterMusics()"
+        >
+    </div>
 
-    <!-- Lista de músicas -->
-    <div id="musics-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4">
+    <div id="musics-list" class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4" style="display: none;">
         @foreach ($musics as $music)
-            <label class="flex items-center gap-4 p-4 rounded-lg border border-gray-300 bg-white dark:bg-gray-800">
+            <label class="flex items-center gap-4 p-4 rounded-lg border border-gray-300 bg-white dark:bg-gray-800 mb-4 music-item"
+                data-title="{{ strtolower($music->title) }}"
+                data-artist="{{ strtolower($music->artist->name ?? '') }}">
                 <input
                     type="checkbox"
                     name="music_id[]"
@@ -73,13 +77,35 @@
                     @endif
                     class="text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500"
                 >
-                <span class="text-gray-900 dark:text-white">{{ $music->title }}</span>
+                <span class="text-gray-900 dark:text-white">
+                    {{ $music->title }}
+                    @if(isset($music->artist))
+                        <span class="text-xs text-gray-500 dark:text-gray-400">({{ $music->artist->name }})</span>
+                    @endif
+                </span>
             </label>
         @endforeach
     </div>
+
+    <script>
+        function filterMusics() {
+            const search = document.getElementById('music-search').value.toLowerCase();
+            const musicsList = document.getElementById('musics-list');
+            const items = musicsList.querySelectorAll('.music-item');
+            let anyVisible = false;
+
+            items.forEach(item => {
+                const title = item.getAttribute('data-title');
+                const artist = item.getAttribute('data-artist');
+                const match = (title && title.includes(search)) || (artist && artist.includes(search));
+                item.style.display = (match && search.length > 0) ? '' : 'none';
+                if (match && search.length > 0) anyVisible = true;
+            });
+
+            musicsList.style.display = search.length > 0 && anyVisible ? '' : 'none';
+        }
+    </script>
 </div>
-
-
 
 
     {{-- Botões --}}

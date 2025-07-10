@@ -54,7 +54,7 @@
 
     <div class="bg-gray-100 dark:bg-gray-900 overflow-hidden shadow-lg sm:rounded-xl p-6">
         <table class="w-full text-sm text-center text-gray-800 dark:text-white">
-            <thead class="text-xs uppercase bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+            <thead class="text-xs uppercase bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-500">
                 <tr>
                     <th class="px-6 py-3">#</th>
                     <th class="px-6 py-3 text-left">Nome</th>
