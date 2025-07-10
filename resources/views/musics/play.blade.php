@@ -25,7 +25,14 @@
 
     <div class="mt-6 flex justify-between items-center">
         
+    <div>    
+        <a href="{{ route('musics.index') }}">
+            <x-primary-button>
+                {{ __('Voltar') }}
+            </x-primary-button>
+        </a>    
 
+    </div>
 
     <div>
         @if(in_array($music->id, $likedMusicIds))
@@ -44,14 +51,5 @@
         @endif
     </div>
 
-
-        
-        <a href="{{ route('musics.index') }}">
-            <x-primary-button>
-                {{ __('Voltar') }}
-            </x-primary-button>
-        </a>    
-
-    </div>
 </div>
 @endsection
